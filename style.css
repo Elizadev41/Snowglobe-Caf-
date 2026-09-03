@@ -128,6 +128,7 @@ h1 span { color: #5a8497; }
 
 .menu-layout { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 24px; align-items: start; }
 .menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.menu-card:nth-child(3n) { transform: translateY(8px); }
 .menu-card { overflow: hidden; border: 1px solid #d8d0c7; background: #fffaf6; }
 .menu-card[hidden] { display: none; }
 .menu-card > img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
