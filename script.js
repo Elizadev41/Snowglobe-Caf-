@@ -12,7 +12,7 @@ let cart = storedOrders;
 function formatPrice(value) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'CAD'
   }).format(value);
 }
 
@@ -148,7 +148,7 @@ function getSelectedValues(group) {
 
 function getDrinkPrice() {
   const sizePrice = sizePrices[selections.size] || 0;
-  const flavorCount = getSelectedValues('flavour').length;
+  const flavorCount = getSelectedValues('flavor').length;
   const toppingCount = getSelectedValues('topping').length;
   const total = baseDrinkPrice + sizePrice + (flavorCount + toppingCount) * extraChoicePrice;
 
@@ -160,14 +160,14 @@ function updateOrderSummary() {
 
   const size = selections.size || 'Size';
   const base = selections.base || 'Base';
-  const flavours = getSelectedValues('flavour');
+  const flavors = getSelectedValues('flavor');
   const toppings = getSelectedValues('topping');
   const finish = selections.finish || 'Regular';
 
   const parts = [size, base];
 
-  if (flavours.length) {
-    parts.push(`flavors: ${flavours.join(', ')}`);
+  if (flavors.length) {
+    parts.push(`flavors: ${flavors.join(', ')}`);
   }
 
   if (toppings.length) {
@@ -224,7 +224,7 @@ choiceCards.forEach((card) => {
 
   options.forEach((option) => {
     option.addEventListener('click', () => {
-      if (group === 'flavour' || group === 'topping') {
+      if (group === 'flavor' || group === 'topping') {
         const currentValues = getSelectedValues(group);
         const selectedChoice = option.dataset.choice;
         const isActive = currentValues.includes(selectedChoice);
@@ -238,9 +238,14 @@ choiceCards.forEach((card) => {
         if (group === 'topping' && selectedChoice === 'No extra topping') {
           options.forEach((item) => item.classList.remove('selected'));
           option.classList.add('selected');
-          nextValues = isActive ? [] : [selectedChoice];
+          nextValues = [];
         } else {
           const withoutNoTopping = currentValues.filter((value) => value !== 'No extra topping');
+          options.forEach((item) => {
+            if (item.dataset.choice === 'No extra topping') {
+              item.classList.remove('selected');
+            }
+          });
           option.classList.toggle('selected', !isActive);
           nextValues = isActive
             ? withoutNoTopping.filter((value) => value !== selectedChoice)
@@ -261,7 +266,7 @@ choiceCards.forEach((card) => {
   clearButton?.addEventListener('click', () => {
     options.forEach((option) => option.classList.remove('selected'));
 
-    if (group === 'flavour' || group === 'topping') {
+    if (group === 'flavor' || group === 'topping') {
       selections[group] = [];
       card.querySelector('.selection-count').textContent = `0/${maxExtras} selected`;
     } else {
@@ -280,14 +285,14 @@ orderButton?.addEventListener('click', () => {
 
   const size = selections.size;
   const base = selections.base;
-  const flavours = getSelectedValues('flavour');
+  const flavors = getSelectedValues('flavor');
   const toppings = getSelectedValues('topping');
   const finish = selections.finish || 'Regular';
   const totalPrice = getDrinkPrice();
 
-  const flavourText = flavours.length ? `with ${flavours.join(', ')}` : 'regular';
+  const flavorText = flavors.length ? `with ${flavors.join(', ')}` : 'regular';
   const toppingText = toppings.length ? ` + ${toppings.join(', ')}` : '';
-  const displayName = `${size} ${base} ${flavourText}${toppingText} • ${finish}`;
+  const displayName = `${size} ${base} ${flavorText}${toppingText} • ${finish}`;
 
   customOrders.push({
     name: displayName,
