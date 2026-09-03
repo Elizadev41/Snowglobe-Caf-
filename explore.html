@@ -3,85 +3,208 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Browse the seasonal menu at Snowglobe Caf&eacute;.">
-  <title>Menu | Snowglobe Caf&eacute;</title>
+  <meta name="description" content="Browse Snowglobe Café's winter drink menu.">
+  <title>Explore | Snowglobe Café</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <header class="navbar">
-    <a class="logo" href="index.html">Snowglobe Caf&eacute;</a>
+    <a class="logo" href="index.html" aria-label="Snowglobe Café home">Snowglobe Café</a>
+
     <nav aria-label="Primary navigation">
       <a class="active" href="explore.html">Menu</a>
       <a href="build.html">Build a drink</a>
     </nav>
+
     <a class="nav-button" href="build.html">Make a drink</a>
   </header>
 
   <main>
     <section class="page-header" aria-labelledby="page-title">
-      <p class="eyebrow">The winter menu</p>
-      <h1 id="page-title">Drinks for<br><span>cold days.</span></h1>
-      <p>Four seasonal favourites, from rich hot chocolate to bright iced coffee.</p>
+      <p class="eyebrow">COZY DRINKS</p>
+      <h1 id="page-title">Perfect drinks<br>for this cold season.</h1>
+      <p>Warm favorites, iced picks, and sweet extras for the colder days.</p>
     </section>
 
     <section class="menu-filter" aria-label="Filter drinks">
       <button class="filter-button active" type="button" data-category="all" aria-pressed="true">All drinks</button>
       <button class="filter-button" type="button" data-category="warm" aria-pressed="false">Warm</button>
-      <button class="filter-button" type="button" data-category="cold" aria-pressed="false">Iced</button>
+      <button class="filter-button" type="button" data-category="cold" aria-pressed="false">Cold</button>
       <button class="filter-button" type="button" data-category="treat" aria-pressed="false">Sweet</button>
     </section>
 
-    <section class="menu-grid" aria-label="Seasonal drinks">
-      <article class="menu-card" data-category="warm treat">
-        <img src="Featured%20Drinks/Peppermintcloud.jpg" alt="Peppermint Cloud hot chocolate topped with whipped cream">
-        <div class="menu-card-content">
-          <p class="drink-category">Warm · Sweet</p>
-          <div class="drink-title"><h2>Peppermint Cloud</h2><strong>$5.75</strong></div>
-          <p>Rich hot chocolate with peppermint and whipped cream.</p>
-        </div>
-      </article>
+    <div class="menu-layout">
+      <section class="menu-grid" aria-label="Seasonal drinks">
+        <article class="menu-card" data-category="warm treat" data-name="Peppermint Cloud" data-price="5.75">
+          <img src="Featured%20Drinks/Peppermintcloud.jpg" alt="Peppermint Cloud hot chocolate topped with whipped cream">
+          <div class="menu-card-content">
+            <p class="drink-category">Warm · Sweet</p>
+            <div class="drink-title">
+              <h2>Peppermint Cloud</h2>
+              <strong>$5.75</strong>
+            </div>
+            <p>Rich hot chocolate, peppermint, whipped cream and marshmallows.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
 
-      <article class="menu-card" data-category="cold">
-        <img src="Featured%20Drinks/Snowberry%20Latte.jpg" alt="Snowberry Latte">
-        <div class="menu-card-content">
-          <p class="drink-category">Iced</p>
-          <div class="drink-title"><h2>Snowberry Latte</h2><strong>$5.95</strong></div>
-          <p>A smooth latte with a bright berry note and cold foam.</p>
-        </div>
-      </article>
+        <article class="menu-card" data-category="cold" data-name="Snowberry Latte" data-price="5.95">
+          <img src="Featured%20Drinks/Snowberry%20Latte.jpg" alt="Snowberry Latte with berry notes and cold foam">
+          <div class="menu-card-content">
+            <p class="drink-category">Iced</p>
+            <div class="drink-title">
+              <h2>Snowberry Latte</h2>
+              <strong>$5.95</strong>
+            </div>
+            <p>Vanilla latte, blueberry syrup and silky cold foam.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
 
-      <article class="menu-card" data-category="warm">
-        <img src="Featured%20Drinks/Cinnamon%20Snowcap.jpg" alt="Cinnamon Snowcap">
-        <div class="menu-card-content">
-          <p class="drink-category">Warm</p>
-          <div class="drink-title"><h2>Cinnamon Snowcap</h2><strong>$5.50</strong></div>
-          <p>Spiced chai with vanilla, cinnamon, and a creamy finish.</p>
-        </div>
-      </article>
+        <article class="menu-card" data-category="warm" data-name="Cinnamon Snowcap" data-price="5.50">
+          <img src="Featured%20Drinks/Cinnamon%20Snowcap.jpg" alt="Cinnamon Snowcap chai latte">
+          <div class="menu-card-content">
+            <p class="drink-category">Warm</p>
+            <div class="drink-title">
+              <h2>Cinnamon Snowcap</h2>
+              <strong>$5.50</strong>
+            </div>
+            <p>Spiced chai, vanilla, cinnamon and a cloud of whipped cream.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
 
-      <article class="menu-card" data-category="cold treat">
-        <img src="Featured%20Drinks/Frosted%20Mocha.jpg" alt="Frosted Mocha">
-        <div class="menu-card-content">
-          <p class="drink-category">Iced · Sweet</p>
-          <div class="drink-title"><h2>Frosted Mocha</h2><strong>$6.25</strong></div>
-          <p>Chocolate, espresso, and a cool layer of whipped cream.</p>
+        <article class="menu-card" data-category="cold treat" data-name="Frosted Mocha" data-price="6.25">
+          <img src="Featured%20Drinks/Frosted%20Mocha.jpg" alt="Frosted Mocha chocolate drink with whipped cream">
+          <div class="menu-card-content">
+            <p class="drink-category">Iced · Sweet</p>
+            <div class="drink-title">
+              <h2>Frosted Mocha</h2>
+              <strong>$6.25</strong>
+            </div>
+            <p>Creamy chocolate mocha with whipped cream and chocolate drizzle.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="warm" data-name="Maple Snow Latte" data-price="5.75">
+          <img src="Menu%20Drinks/Maple%20Snow%20Latte.jpg" alt="Maple Snow Latte">
+          <div class="menu-card-content">
+            <p class="drink-category">Warm</p>
+            <div class="drink-title">
+              <h2>Maple Snow Latte</h2>
+              <strong>$5.75</strong>
+            </div>
+            <p>Smooth maple latte with vanilla foam and a hint of cinnamon.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="warm treat" data-name="Gingerbread Latte" data-price="6.00">
+          <img src="Menu%20Drinks/Gingerbread%20Latte.jpg" alt="Gingerbread Latte">
+          <div class="menu-card-content">
+            <p class="drink-category">Warm · Sweet</p>
+            <div class="drink-title">
+              <h2>Gingerbread Latte</h2>
+              <strong>$6.00</strong>
+            </div>
+            <p>Gingerbread spice, vanilla cream and a cozy finish.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="cold" data-name="Blueberry Frost" data-price="5.50">
+          <img src="Menu%20Drinks/Blueberry%20Frost.jpg" alt="Blueberry Frost">
+          <div class="menu-card-content">
+            <p class="drink-category">Iced</p>
+            <div class="drink-title">
+              <h2>Blueberry Frost</h2>
+              <strong>$5.50</strong>
+            </div>
+            <p>Blueberry cream, vanilla and crushed ice topped with cold foam.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="treat" data-name="Toasted Marshmallow Cocoa" data-price="5.95">
+          <img src="Menu%20Drinks/Toasted%20Marshmallow%20Cocoa.jpg" alt="Toasted Marshmallow Cocoa">
+          <div class="menu-card-content">
+            <p class="drink-category">Sweet</p>
+            <div class="drink-title">
+              <h2>Toasted Marshmallow Cocoa</h2>
+              <strong>$5.95</strong>
+            </div>
+            <p>Creamy cocoa with toasted marshmallow and caramel notes.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="cold" data-name="Winter Wonderland" data-price="6.25">
+          <img src="Menu%20Drinks/Winter%20Wonderland.jpg" alt="Winter Wonderland">
+          <div class="menu-card-content">
+            <p class="drink-category">Iced</p>
+            <div class="drink-title">
+              <h2>Winter Wonderland</h2>
+              <strong>$6.25</strong>
+            </div>
+            <p>Sparkling vanilla, coconut, white chocolate and snowy foam.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="treat" data-name="Cookie Snowfall" data-price="6.25">
+          <img src="Menu%20Drinks/Cookie%20Snowfall.jpg" alt="Cookie Snowfall">
+          <div class="menu-card-content">
+            <p class="drink-category">Sweet</p>
+            <div class="drink-title">
+              <h2>Cookie Snowfall</h2>
+              <strong>$6.25</strong>
+            </div>
+            <p>Vanilla cream, chocolate cookie, caramel and whipped cream.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+
+        <article class="menu-card" data-category="treat" data-name="White Chocolate Blizzard" data-price="6.50">
+          <img src="Menu%20Drinks/White%20Chocolate%20Blizzard.jpg" alt="White Chocolate Blizzard">
+          <div class="menu-card-content">
+            <p class="drink-category">Sweet</p>
+            <div class="drink-title">
+              <h2>White Chocolate Blizzard</h2>
+              <strong>$6.50</strong>
+            </div>
+            <p>White chocolate mocha, vanilla cream and white chocolate curls.</p>
+            <button class="select-button" type="button">Select drink</button>
+          </div>
+        </article>
+      </section>
+
+      <aside class="cart-panel" aria-live="polite">
+        <h2>Your order</h2>
+        <ul id="cart-list" class="cart-list">
+          <li class="empty-cart">No drinks added yet.</li>
+        </ul>
+        <div class="cart-total">
+          <span>Total</span>
+          <strong id="cart-total">$0.00</strong>
         </div>
-      </article>
-    </section>
+        <button type="button" class="primary-button cart-button">Checkout</button>
+      </aside>
+    </div>
 
     <section class="build-cta" aria-labelledby="build-title">
-      <p class="eyebrow">Want something different?</p>
-      <h2 id="build-title">Make it yours.</h2>
-      <p>Start with a drink you like, then choose the flavours and finishing touches.</p>
-      <a class="primary-button" href="build.html">Build a drink <span aria-hidden="true">&rarr;</span></a>
+      <p class="eyebrow">Can’t find your perfect drink?</p>
+      <h2 id="build-title">Make one up.</h2>
+      <p>Mix flavors, toppings and finishes to create something completely yours.</p>
+      <a class="primary-button" href="build.html">Build my drink →</a>
     </section>
   </main>
 
   <footer>
-    <a class="footer-logo" href="index.html">Snowglobe Caf&eacute;</a>
-    <p>For snowy days and late nights.</p>
-    <p class="copyright">&copy; 2026 Snowglobe Caf&eacute;</p>
+    <a class="footer-logo" href="index.html">Snowglobe Café</a>
+    <p>Made for snowy days &amp; cozy nights.</p>
+    <p class="copyright">© 2026 Snowglobe Café</p>
   </footer>
 
   <script src="script.js"></script>

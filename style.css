@@ -4,9 +4,9 @@
 
 body {
   margin: 0;
-  color: #24313a;
-  background: #f8fbfc;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #2d2a29;
+  background: #f7f3ee;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
   line-height: 1.5;
 }
 
@@ -36,6 +36,11 @@ footer {
   gap: 24px;
 }
 
+.page-header {
+  padding-top: 28px;
+  padding-bottom: 12px;
+}
+
 .logo,
 .footer-logo {
   font-family: Georgia, serif;
@@ -51,10 +56,10 @@ nav a.active { font-weight: 700; text-decoration: underline; text-underline-offs
 .nav-button,
 .primary-button {
   display: inline-block;
-  padding: 11px 17px;
-  border-radius: 999px;
+  padding: 11px 18px;
   color: #fff;
-  background: #315d73;
+  background: #3f6475;
+  border: 1px solid #3f6475;
   font-weight: 700;
   text-decoration: none;
 }
@@ -62,10 +67,10 @@ nav a.active { font-weight: 700; text-decoration: underline; text-underline-offs
 .eyebrow,
 .drink-category {
   margin: 0 0 10px;
-  color: #56798a;
-  font-size: .75rem;
+  color: #5b6d74;
+  font-size: .7rem;
   font-weight: 700;
-  letter-spacing: .11em;
+  letter-spacing: .08em;
   text-transform: uppercase;
 }
 
@@ -76,13 +81,26 @@ nav a.active { font-weight: 700; text-decoration: underline; text-underline-offs
 
 .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 56px; align-items: center; }
 h1, h2, h3 { font-family: Georgia, serif; line-height: 1.08; }
-h1 { margin: 0; font-size: clamp(2.8rem, 6vw, 5.2rem); }
+h1 { margin: 0; font-size: clamp(2.4rem, 5vw, 5.5rem); }
 h1 span { color: #5a8497; }
-.hero-description, .page-header > p:last-child { max-width: 510px; font-size: 1.1rem; }
+.page-header h1 {
+  line-height: .95;
+  letter-spacing: -.05em;
+}
+.page-header .eyebrow {
+  letter-spacing: .12em;
+  font-size: .72rem;
+}
+.page-header > p:last-child {
+  max-width: 700px;
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  line-height: 1.35;
+}
+.hero-description { max-width: 510px; font-size: 1.08rem; }
 .hero-buttons { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 26px; align-items: center; }
 .secondary-button { font-weight: 700; text-decoration: none; }
-.snow-globe { padding: 18px; background: #e5f1f5; border-radius: 24px; }
-.drink-card { background: #fff; border-radius: 16px; overflow: hidden; }
+.snow-globe { padding: 18px; border: 1px solid #dce7eb; }
+.drink-card { background: #fff; overflow: hidden; }
 .drink-info { padding: 20px; }
 .drink-info h2 { margin: 0 0 14px; }
 
@@ -105,20 +123,36 @@ h1 span { color: #5a8497; }
 .page-header { padding-bottom: 28px; }
 .page-header h1 { margin-bottom: 20px; }
 .menu-filter { display: flex; flex-wrap: wrap; gap: 10px; padding-block: 24px 34px; }
-.filter-button { padding: 9px 15px; border: 1px solid #b8ccd4; border-radius: 999px; color: #315d73; background: transparent; font: inherit; cursor: pointer; }
-.filter-button.active, .filter-button:hover { color: #fff; background: #315d73; border-color: #315d73; }
+.filter-button { padding: 9px 15px; border: 1px solid #cabfb6; color: #3a4d57; background: #f3eee8; font: inherit; cursor: pointer; }
+.filter-button.active, .filter-button:hover { color: #fff; background: #3f6475; border-color: #3f6475; }
 
-.menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.menu-card { overflow: hidden; border: 1px solid #dce7eb; border-radius: 16px; background: #fff; }
+.menu-layout { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 24px; align-items: start; }
+.menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.menu-card { overflow: hidden; border: 1px solid #d8d0c7; background: #fffaf6; }
 .menu-card[hidden] { display: none; }
 .menu-card > img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 .menu-card-content { padding: 18px; }
 .drink-title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .drink-title h2 { margin: 0; font-size: 1.35rem; }
-.drink-title strong { white-space: nowrap; color: #315d73; }
+.drink-title strong { white-space: nowrap; color: #355d6a; }
 .menu-card-content > p:last-child { margin-bottom: 0; font-size: .95rem; }
+.select-button {
+  margin-top: 14px; width: 100%; border: 0; background: #e8ddd1; color: #2d2a29; padding: 10px 12px; font: inherit; font-weight: 700; cursor: pointer;
+}
+.select-button:hover { background: #dcc8b6; }
+.cart-panel {
+  position: sticky; top: 20px; padding: 22px 18px; border: 1px solid #d8d0c7; background: #f1e9e1;
+}
+.cart-panel h2 { margin-top: 0; margin-bottom: 16px; font-size: 1.6rem; }
+.cart-list { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; }
+.cart-list li { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid #d8d0c7; }
+.cart-list li:last-child { border-bottom: 0; }
+.empty-cart { color: #60717a; }
+.cart-item-name { font-weight: 700; }
+.cart-total { display: flex; justify-content: space-between; align-items: center; margin: 18px 0; padding-top: 12px; border-top: 1px solid #d8d0c7; font-size: 1.05rem; }
+.cart-button { width: 100%; border: 0; text-align: center; }
 
-.build-cta, .cta { margin-block: 80px; padding: 46px; border-radius: 20px; color: #fff; background: #315d73; }
+.build-cta, .cta { margin-block: 80px; padding: 46px; color: #fff; background: #315d73; }
 .build-cta .eyebrow { color: #d6ecf3; }
 .build-cta h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
 .build-cta > p:not(.eyebrow) { max-width: 500px; }
@@ -128,9 +162,49 @@ footer { padding-block: 28px 42px; border-top: 1px solid #dce7eb; }
 footer p { margin: 8px 0; }
 .copyright { color: #60717a; font-size: .85rem; }
 
+.build-page { background: #e4f0f1; }
+.builder { width: min(680px, calc(100% - 40px)); margin: 0 auto; padding-block: 52px 72px; }
+.builder-header { text-align: center; margin-bottom: 34px; }
+.builder-header h1 { margin-bottom: 16px; font-size: clamp(3rem, 8vw, 5.4rem); }
+.builder-header > p:last-child { margin-inline: auto; max-width: 360px; }
+.choice-card,
+.order-card { padding: 24px; border: 2px solid #315d73; background: #f9fcfc; }
+.choice-card + .choice-card,
+.choice-card + .order-card { margin-top: 16px; }
+.choice-card h2 { margin: 0 0 18px; color: #315d73; font-size: 1.55rem; }
+.choice-row { display: flex; flex-wrap: wrap; gap: 9px; }
+.choice-option,
+.clear-selection,
+#place-order { border: 1px solid #315d73; font: inherit; cursor: pointer; }
+.choice-option { padding: 10px 14px; color: #315d73; background: #fff; }
+.choice-option:hover,
+.choice-option.selected { color: #fff; background: #315d73; }
+.clear-selection { margin-top: 15px; padding: 0; border: 0; color: #315d73; background: transparent; text-decoration: underline; }
+.order-card { margin-top: 16px; color: #fff; background: #315d73; }
+.order-card .eyebrow { color: #c8e2e3; }
+.order-summary { margin: 0 0 18px; font-family: Georgia, serif; font-size: 1.55rem; line-height: 1.15; }
+#place-order { padding: 11px 16px; color: #315d73; background: #fff; font-weight: 700; }
+#order-count { margin: 14px 0 0; font-size: .9rem; }
+
+.intro,
+.features { padding-block: 64px; }
+
+.intro { border-top: 1px solid #dce7eb; }
+.intro h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
+.intro > p:not(.eyebrow) { max-width: 570px; }
+.intro a { color: #315d73; font-weight: 700; }
+
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; border-top: 1px solid #dce7eb; }
+.section-heading { grid-column: 1 / -1; }
+.section-heading h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
+.feature-card { border-top: 2px solid #315d73; padding-top: 16px; }
+.feature-card h3 { margin: 0 0 14px; font-size: 1.4rem; }
+.feature-card img { margin-bottom: 14px; }
+
 @media (max-width: 800px) {
   .hero { grid-template-columns: 1fr; gap: 30px; }
   .menu-grid { grid-template-columns: repeat(2, 1fr); }
+  .features { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 560px) {
@@ -139,5 +213,7 @@ footer p { margin: 8px 0; }
   .nav-button { margin-left: auto; }
   .hero, .page-header { padding-block: 46px 32px; }
   .menu-grid { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; }
   .build-cta, .cta { margin-block: 48px; padding: 30px; }
+  .builder { padding-top: 28px; }
 }
