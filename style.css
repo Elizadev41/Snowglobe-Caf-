@@ -130,7 +130,7 @@ h1 span { color: #5a8497; }
 .menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .menu-card { overflow: hidden; border: 1px solid #d8d0c7; background: #fffaf6; }
 .menu-card[hidden] { display: none; }
-.menu-card > img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.menu-card > img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
 .menu-card-content { padding: 18px; }
 .drink-title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .drink-title h2 { margin: 0; font-size: 1.35rem; }
