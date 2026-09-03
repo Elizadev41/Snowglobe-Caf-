@@ -33,6 +33,7 @@
       <button class="filter-button" type="button" data-category="warm" aria-pressed="false">Warm</button>
       <button class="filter-button" type="button" data-category="cold" aria-pressed="false">Cold</button>
       <button class="filter-button" type="button" data-category="treat" aria-pressed="false">Sweet</button>
+      <button class="filter-button" type="button" data-category="snack" aria-pressed="false">Snacks</button>
     </section>
 
     <div class="menu-layout">
@@ -179,6 +180,97 @@
             <button class="select-button" type="button">Select drink</button>
           </div>
         </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Snowflake Sugar Cookie" data-price="2.75">
+          <img src="Snacks/Cozy%20Chocolate%20Chip%20Cookie.jpg" alt="Cozy Chocolate Chip Cookie">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Cozy Chocolate Chip Cookie</h2>
+              <strong>$2.75</strong>
+            </div>
+            <p>Soft, warm chocolate chip cookie for dunking.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Snowcap Croissant" data-price="4.25">
+          <img src="Snacks/Snowcap%20Croissant.jpg" alt="Snowcap Croissant">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Snowcap Croissant</h2>
+              <strong>$4.25</strong>
+            </div>
+            <p>Flaky, buttery pastry with a sweet snowy finish.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Frostbite Brownie" data-price="3.95">
+          <img src="Snacks/Frostbite%20Brownie.jpg" alt="Frostbite Brownie">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Frostbite Brownie</h2>
+              <strong>$3.95</strong>
+            </div>
+            <p>Fudgy chocolate brownie dusted with powdered sugar.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Snowflake Waffles" data-price="4.95">
+          <img src="Snacks/Snowflake%20Waffles.jpg" alt="Snowflake Waffles">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Snowflake Waffles</h2>
+              <strong>$4.95</strong>
+            </div>
+            <p>Golden waffles with maple syrup and winter spice.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Snowglobe Cheesecake" data-price="5.25">
+          <img src="Snacks/Snowglobe%20Cheesecake.jpg" alt="Snowglobe Cheesecake">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Snowglobe Cheesecake</h2>
+              <strong>$5.25</strong>
+            </div>
+            <p>Creamy cheesecake with a crisp cookie crumb base.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Winter Berry Parfait" data-price="4.75">
+          <img src="Snacks/Winter%20Berry%20Parfait.jpg" alt="Winter Berry Parfait">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Winter Berry Parfait</h2>
+              <strong>$4.75</strong>
+            </div>
+            <p>Berry compote, creamy yogurt, and crunchy granola.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
+
+        <article class="menu-card snack-card" data-category="snack" data-name="Après-Ski Grilled Cheese" data-price="6.25">
+          <img src="Snacks/Apr%C3%A8s-Ski%20Grilled%20Cheese.jpg" alt="Après-Ski Grilled Cheese">
+          <div class="menu-card-content">
+            <p class="drink-category">Snack</p>
+            <div class="drink-title">
+              <h2>Après-Ski Grilled Cheese</h2>
+              <strong>$6.25</strong>
+            </div>
+            <p>Golden toasted bread with a warm, melty cheese center.</p>
+            <button class="select-button" type="button">Add snack</button>
+          </div>
+        </article>
       </section>
 
       <aside class="cart-panel" aria-live="polite">
@@ -190,15 +282,37 @@
           <span>Total</span>
           <strong id="cart-total">$0.00</strong>
         </div>
-        <button type="button" class="primary-button cart-button">Checkout</button>
+        <a class="primary-button cart-button" href="cart.html">Checkout</a>
       </aside>
     </div>
 
+    <div class="drink-dialog" id="drink-dialog" role="dialog" aria-modal="true" aria-labelledby="drink-dialog-title" hidden>
+      <div class="drink-dialog-panel">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="Close drink details">Close</button>
+        <img id="drink-dialog-image" src="" alt="">
+        <div class="drink-dialog-content">
+          <p class="drink-category">Drink details</p>
+          <h2 id="drink-dialog-title"></h2>
+          <p id="drink-dialog-description"></p>
+          <p class="allergy-note"><strong>Possible allergens:</strong> <span id="drink-dialog-allergies"></span></p>
+          <fieldset class="size-picker">
+            <legend>Choose a size</legend>
+            <div class="size-options">
+              <label><input type="radio" name="menu-size" value="Small" data-upgrade="0" checked> Small <span>$<span data-size-price="Small"></span></span></label>
+              <label><input type="radio" name="menu-size" value="Medium" data-upgrade="0.6"> Medium <span>$<span data-size-price="Medium"></span></span></label>
+              <label><input type="radio" name="menu-size" value="Large" data-upgrade="0.8"> Large <span>$<span data-size-price="Large"></span></span></label>
+            </div>
+          </fieldset>
+          <button class="primary-button" id="add-detailed-drink" type="button">Add to order</button>
+        </div>
+      </div>
+    </div>
+
     <section class="build-cta" aria-labelledby="build-title">
-      <p class="eyebrow">Want to mess with it?</p>
+      <p class="eyebrow">Want to personalize it?</p>
       <h2 id="build-title">Make your own.</h2>
       <p>Choose the base, add some flavors, and see what happens.</p>
-      <a class="primary-button" href="build.html">Start mixing →</a>
+      <a class="primary-button" href="build.html">Build Your Own →</a>
     </section>
   </main>
 

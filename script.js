@@ -5,7 +5,22 @@ const cartTotal = document.querySelector('#cart-total');
 const fullCartList = document.querySelector('#full-cart-list');
 const fullCartTotal = document.querySelector('#full-cart-total');
 const checkoutButton = document.querySelector('#checkout-button');
+const checkoutForm = document.querySelector('#checkout-form');
 const checkoutMessage = document.querySelector('#checkout-message');
+const confirmationPanel = document.querySelector('#confirmation-panel');
+const confirmationDetails = document.querySelector('#confirmation-details');
+const confirmationItems = document.querySelector('#confirmation-items');
+const confirmationTotal = document.querySelector('#confirmation-total');
+const drinkDialog = document.querySelector('#drink-dialog');
+const dialogClose = document.querySelector('#dialog-close');
+const dialogImage = document.querySelector('#drink-dialog-image');
+const dialogTitle = document.querySelector('#drink-dialog-title');
+const dialogDescription = document.querySelector('#drink-dialog-description');
+const dialogAllergies = document.querySelector('#drink-dialog-allergies');
+const addDetailedDrink = document.querySelector('#add-detailed-drink');
+const sizePicker = document.querySelector('.size-picker');
+const menuSizeOptions = document.querySelectorAll('input[name="menu-size"]');
+let selectedMenuDrink = null;
 const storedOrders = JSON.parse(localStorage.getItem('snowglobeOrders') || '[]');
 let cart = storedOrders;
 
@@ -36,28 +51,56 @@ function renderFullCart() {
         <li>
           <span class="custom-cart-item">
             <strong>${item.name}</strong>
-            <span>${formatPrice(item.price)}</span>
+            <span>${formatPrice(item.price)} each</span>
           </span>
-          <button class="remove-item" type="button" data-full-index="${index}">Remove</button>
+          <span class="cart-item-actions">
+            <button class="quantity-button" type="button" data-cart-action="decrease" data-full-index="${index}" aria-label="Decrease ${item.name} quantity">−</button>
+            <strong>${item.quantity || 1}</strong>
+            <button class="quantity-button" type="button" data-cart-action="increase" data-full-index="${index}" aria-label="Increase ${item.name} quantity">+</button>
+            <button class="remove-item" type="button" data-cart-action="remove" data-full-index="${index}">Remove</button>
+          </span>
         </li>
       `
     )
     .join('');
 
-  fullCartTotal.textContent = formatPrice(cart.reduce((sum, item) => sum + item.price, 0));
+  fullCartTotal.textContent = formatPrice(cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0));
   checkoutButton.disabled = false;
 
-  fullCartList.querySelectorAll('[data-full-index]').forEach((button) => {
+  fullCartList.querySelectorAll('[data-cart-action]').forEach((button) => {
     button.addEventListener('click', () => {
-      cart.splice(Number(button.dataset.fullIndex), 1);
+      const index = Number(button.dataset.fullIndex);
+      const item = cart[index];
+      const action = button.dataset.cartAction;
+      item.quantity = item.quantity || 1;
+
+      if (action === 'increase') item.quantity += 1;
+      if (action === 'decrease') item.quantity -= 1;
+      if (action === 'remove' || item.quantity < 1) cart.splice(index, 1);
       saveOrders(cart);
       renderFullCart();
     });
   });
 }
 
-checkoutButton?.addEventListener('click', () => {
-  checkoutMessage.textContent = 'Thanks! Your order is ready for pickup.';
+checkoutForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (!cart.length) return;
+
+  const formData = new FormData(checkoutForm);
+  const nextOrderNumber = Number(localStorage.getItem('snowglobeOrderNumber') || '0') + 1;
+  localStorage.setItem('snowglobeOrderNumber', String(nextOrderNumber));
+  const orderNumber = `SGC-${nextOrderNumber}`;
+  const customerName = formData.get('customerName');
+  const pickupTime = formData.get('pickupTime');
+  const paymentMethod = formData.get('paymentMethod');
+  const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+  checkoutMessage.textContent = `Thanks, ${customerName}!`;
+  confirmationDetails.textContent = `${orderNumber} is confirmed for ${pickupTime}. Payment: ${paymentMethod.toLowerCase()} at pickup.`;
+  confirmationItems.innerHTML = cart.map((item) => `<li><span>${item.name} × ${item.quantity || 1}</span><strong>${formatPrice(item.price * (item.quantity || 1))}</strong></li>`).join('');
+  confirmationTotal.textContent = formatPrice(total);
+  confirmationPanel.hidden = false;
+  checkoutForm.reset();
 });
 
 function renderCart() {
@@ -73,14 +116,14 @@ function renderCart() {
     .map(
       (item) => `
         <li>
-          <span class="cart-item-name">${item.name}</span>
-          <span>${formatPrice(item.price)}</span>
+          <span class="cart-item-name">${item.name} × ${item.quantity || 1}</span>
+          <span>${formatPrice(item.price * (item.quantity || 1))}</span>
         </li>
       `
     )
     .join('');
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
   cartTotal.textContent = formatPrice(total);
 }
 
@@ -101,17 +144,79 @@ filterButtons.forEach((button) => {
   });
 });
 
+const drinkAllergies = {
+  'Peppermint Cloud': 'milk, may contain soy',
+  'Snowberry Latte': 'milk, may contain soy',
+  'Cinnamon Snowcap': 'milk',
+  'Frosted Mocha': 'milk, soy',
+  'Maple Snow Latte': 'milk',
+  'Gingerbread Latte': 'milk, wheat',
+  'Blueberry Frost': 'milk',
+  'Toasted Marshmallow Cocoa': 'milk, soy',
+  'Winter Wonderland': 'milk, coconut',
+  'Cookie Snowfall': 'milk, wheat, soy',
+  'White Chocolate Blizzard': 'milk, soy',
+  'Cozy Chocolate Chip Cookie': 'wheat, milk, soy',
+  'Snowcap Croissant': 'wheat, milk, egg',
+  'Frostbite Brownie': 'wheat, milk, egg, soy',
+  'Snowflake Waffles': 'wheat, milk, egg',
+  'Snowglobe Cheesecake': 'wheat, milk, egg',
+  'Winter Berry Parfait': 'milk, may contain nuts',
+  'Après-Ski Grilled Cheese': 'wheat, milk'
+};
+
+function openDrinkDialog(card) {
+  selectedMenuDrink = card;
+  const name = card.dataset.name;
+  const price = Number(card.dataset.price);
+  const image = card.querySelector('img');
+
+  dialogTitle.textContent = name;
+  dialogDescription.textContent = card.querySelector('.menu-card-content > p:last-of-type').textContent;
+  dialogAllergies.textContent = drinkAllergies[name] || 'Please ask a team member for ingredient details';
+  dialogImage.src = image?.src || '';
+  dialogImage.alt = image?.alt || name;
+  const isSnack = card.dataset.category === 'snack';
+  sizePicker.hidden = isSnack;
+  addDetailedDrink.textContent = isSnack ? 'Add snack to order' : 'Add drink to order';
+  if (!isSnack) {
+    document.querySelector('[data-size-price="Small"]').textContent = price.toFixed(2);
+    document.querySelector('[data-size-price="Medium"]').textContent = (price + 0.6).toFixed(2);
+    document.querySelector('[data-size-price="Large"]').textContent = (price + 0.8).toFixed(2);
+  }
+  menuSizeOptions[0].checked = true;
+  drinkDialog.hidden = false;
+  dialogClose.focus();
+}
+
+function closeDrinkDialog() {
+  drinkDialog.hidden = true;
+  selectedMenuDrink = null;
+}
+
 menuCards.forEach((card) => {
-  const button = card.querySelector('.select-button');
-
-  button?.addEventListener('click', () => {
-    const name = card.dataset.name;
-    const price = Number(card.dataset.price);
-
-    cart.push({ name, price });
-    saveOrders(cart);
-    renderCart();
+  card.addEventListener('click', (event) => {
+    if (!event.target.closest('button')) openDrinkDialog(card);
   });
+});
+
+dialogClose?.addEventListener('click', closeDrinkDialog);
+drinkDialog?.addEventListener('click', (event) => {
+  if (event.target === drinkDialog) closeDrinkDialog();
+});
+
+addDetailedDrink?.addEventListener('click', () => {
+  if (!selectedMenuDrink) return;
+
+  const selectedSize = document.querySelector('input[name="menu-size"]:checked');
+  const isSnack = selectedMenuDrink.dataset.category === 'snack';
+  const size = selectedSize.value;
+  const price = Number(selectedMenuDrink.dataset.price) + (isSnack ? 0 : Number(selectedSize.dataset.upgrade));
+  const displayName = isSnack ? selectedMenuDrink.dataset.name : `${size} ${selectedMenuDrink.dataset.name}`;
+  cart.push({ name: displayName, price });
+  saveOrders(cart);
+  renderCart();
+  closeDrinkDialog();
 });
 
 renderFullCart();

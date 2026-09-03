@@ -34,8 +34,41 @@
         <span>Total</span>
         <strong id="full-cart-total">$0.00</strong>
       </div>
-      <button id="checkout-button" class="primary-button cart-button" type="button">Checkout</button>
+      <form id="checkout-form" class="checkout-form">
+        <h2>Pickup details</h2>
+        <label for="customer-name">Name</label>
+        <input id="customer-name" name="customerName" type="text" autocomplete="name" required>
+
+        <label for="pickup-time">Pickup time</label>
+        <select id="pickup-time" name="pickupTime" required>
+          <option value="">Choose a time</option>
+          <option>As soon as possible</option>
+          <option>12:00 PM - 12:15 PM</option>
+          <option>12:30 PM - 12:45 PM</option>
+          <option>1:00 PM - 1:15 PM</option>
+          <option>1:30 PM - 1:45 PM</option>
+          <option>2:00 PM - 2:15 PM</option>
+        </select>
+
+        <fieldset>
+          <legend>Payment method</legend>
+          <label><input type="radio" name="paymentMethod" value="Card" required> Card at pickup</label>
+          <label><input type="radio" name="paymentMethod" value="Cash"> Cash at pickup</label>
+        </fieldset>
+
+        <button id="checkout-button" class="primary-button cart-button" type="submit">Place order</button>
+      </form>
       <p id="checkout-message" class="checkout-message"></p>
+      <section id="confirmation-panel" class="confirmation-panel" hidden aria-live="polite">
+        <p class="eyebrow">Order confirmed</p>
+        <h2>See you soon.</h2>
+        <p id="confirmation-details"></p>
+        <ul id="confirmation-items"></ul>
+        <div class="confirmation-total">
+          <span>Total</span>
+          <strong id="confirmation-total"></strong>
+        </div>
+      </section>
     </section>
   </main>
 
