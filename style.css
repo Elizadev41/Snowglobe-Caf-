@@ -163,6 +163,16 @@ footer p { margin: 8px 0; }
 .copyright { color: #60717a; font-size: .85rem; }
 
 .build-page { background: #e4f0f1; }
+.cart-page { background: #f7f3ee; }
+.cart-header { padding-bottom: 28px; }
+.cart-page-panel { width: min(680px, calc(100% - 40px)); margin: 0 auto 72px; padding: 24px; border: 2px solid #315d73; background: #fff; }
+.full-cart-list { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 12px; }
+.full-cart-list li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid #dce7eb; }
+.full-cart-list li:last-child { border-bottom: 0; }
+.full-cart-total { display: flex; justify-content: space-between; padding-top: 16px; border-top: 2px solid #315d73; font-size: 1.1rem; }
+.cart-page-panel .cart-button { margin-top: 22px; }
+.cart-button:disabled { cursor: not-allowed; opacity: .5; }
+.checkout-message { margin: 14px 0 0; color: #315d73; font-weight: 700; }
 .builder { width: min(680px, calc(100% - 40px)); margin: 0 auto; padding-block: 52px 72px; }
 .builder-header { text-align: center; margin-bottom: 34px; }
 .builder-header h1 { margin-bottom: 16px; font-size: clamp(3rem, 8vw, 5.4rem); }

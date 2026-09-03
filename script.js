@@ -2,7 +2,12 @@ const filterButtons = document.querySelectorAll('.filter-button');
 const menuCards = document.querySelectorAll('.menu-card');
 const cartList = document.querySelector('#cart-list');
 const cartTotal = document.querySelector('#cart-total');
-let cart = [];
+const fullCartList = document.querySelector('#full-cart-list');
+const fullCartTotal = document.querySelector('#full-cart-total');
+const checkoutButton = document.querySelector('#checkout-button');
+const checkoutMessage = document.querySelector('#checkout-message');
+const storedOrders = JSON.parse(localStorage.getItem('snowglobeOrders') || '[]');
+let cart = storedOrders;
 
 function formatPrice(value) {
   return new Intl.NumberFormat('en-US', {
@@ -10,6 +15,50 @@ function formatPrice(value) {
     currency: 'USD'
   }).format(value);
 }
+
+function saveOrders(orders) {
+  localStorage.setItem('snowglobeOrders', JSON.stringify(orders));
+}
+
+function renderFullCart() {
+  if (!fullCartList || !fullCartTotal) return;
+
+  if (!cart.length) {
+    fullCartList.innerHTML = '<li class="empty-cart">Your cart is empty.</li>';
+    fullCartTotal.textContent = '$0.00';
+    checkoutButton.disabled = true;
+    return;
+  }
+
+  fullCartList.innerHTML = cart
+    .map(
+      (item, index) => `
+        <li>
+          <span class="custom-cart-item">
+            <strong>${item.name}</strong>
+            <span>${formatPrice(item.price)}</span>
+          </span>
+          <button class="remove-item" type="button" data-full-index="${index}">Remove</button>
+        </li>
+      `
+    )
+    .join('');
+
+  fullCartTotal.textContent = formatPrice(cart.reduce((sum, item) => sum + item.price, 0));
+  checkoutButton.disabled = false;
+
+  fullCartList.querySelectorAll('[data-full-index]').forEach((button) => {
+    button.addEventListener('click', () => {
+      cart.splice(Number(button.dataset.fullIndex), 1);
+      saveOrders(cart);
+      renderFullCart();
+    });
+  });
+}
+
+checkoutButton?.addEventListener('click', () => {
+  checkoutMessage.textContent = 'Thanks! Your order is ready for pickup.';
+});
 
 function renderCart() {
   if (!cartList || !cartTotal) return;
@@ -60,9 +109,12 @@ menuCards.forEach((card) => {
     const price = Number(card.dataset.price);
 
     cart.push({ name, price });
+    saveOrders(cart);
     renderCart();
   });
 });
+
+renderFullCart();
 
 const choiceCards = document.querySelectorAll('[data-choice-group]');
 const orderSummary = document.querySelector('.order-summary');
@@ -71,7 +123,7 @@ const orderCount = document.querySelector('#order-count');
 const customOrderList = document.querySelector('#custom-order-list');
 const customOrderTotal = document.querySelector('#custom-order-total');
 const selections = {};
-let customOrders = [];
+let customOrders = storedOrders;
 
 const sizePrices = {
   Small: 0,
@@ -159,6 +211,7 @@ function renderCustomOrders() {
     button.addEventListener('click', () => {
       const index = Number(button.dataset.index);
       customOrders.splice(index, 1);
+      saveOrders(customOrders);
       renderCustomOrders();
     });
   });
@@ -241,6 +294,7 @@ orderButton?.addEventListener('click', () => {
     price: totalPrice
   });
 
+  saveOrders(customOrders);
   renderCustomOrders();
   orderCount.textContent = `${customOrders.length} custom drink${customOrders.length === 1 ? '' : 's'} added.`;
 });

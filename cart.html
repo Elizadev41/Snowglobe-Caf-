@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="View your Snowglobe Café order.">
+  <title>Your cart | Snowglobe Café</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cart-page">
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Snowglobe Café home">Snowglobe Café</a>
+    <nav aria-label="Primary navigation">
+      <a href="explore.html">Menu</a>
+      <a href="build.html">Build a drink</a>
+      <a class="active" href="cart.html">Cart</a>
+    </nav>
+    <a class="nav-button" href="explore.html">Add a drink</a>
+  </header>
+
+  <main>
+    <section class="page-header cart-header" aria-labelledby="page-title">
+      <p class="eyebrow">Your order</p>
+      <h1 id="page-title">Your cart.</h1>
+      <p>Everything you picked, all in one place.</p>
+    </section>
+
+    <section class="cart-page-panel" aria-live="polite">
+      <ul id="full-cart-list" class="full-cart-list">
+        <li class="empty-cart">Your cart is empty.</li>
+      </ul>
+      <div class="full-cart-total">
+        <span>Total</span>
+        <strong id="full-cart-total">$0.00</strong>
+      </div>
+      <button id="checkout-button" class="primary-button cart-button" type="button">Checkout</button>
+      <p id="checkout-message" class="checkout-message"></p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="footer-logo" href="index.html">Snowglobe Café</a>
+    <p>For snowy days and late nights.</p>
+    <p class="copyright">&copy; 2026 Snowglobe Café</p>
+  </footer>
+
+  <script src="script.js?v=3"></script>
+</body>
+</html>
