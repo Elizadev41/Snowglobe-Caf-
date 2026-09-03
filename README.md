@@ -75,5 +75,5 @@ I used Canva AI to make the images
 And i got the idea of making this from a friend
 
 ## Links
-
-The project can be opened locally through `index.html`.
+Repo: https://github.com/Elizadev41/Snowglobe-Caf-
+Demo: https://elizadev41.github.io/Snowglobe-Caf-/
