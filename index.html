@@ -1,9 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title> SnowGlobe Cafe </title>
-  </head>
-  <body>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Snowglobe Café serves seasonal drinks for cold days.">
+  <title>Snowglobe Café</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Snowglobe Café home">Snowglobe Café</a>
+    <nav aria-label="Primary navigation">
+      <a href="explore.html">Menu</a>
+      <a href="build.html">Build a drink</a>
+    </nav>
+    <a class="nav-button" href="build.html">Make a drink</a>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">Snowglobe Café</p>
+        <h1 id="hero-title">A little winter<br><span>in every cup.</span></h1>
+        <p class="hero-description">Seasonal drinks, familiar favourites, and plenty of ways to make one your own.</p>
+        <div class="hero-buttons">
+          <a class="primary-button" href="explore.html">See the menu</a>
+          <a class="secondary-button" href="build.html">Build a drink <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <aside class="hero-drink" aria-labelledby="featured-title">
+        <div class="snow-globe">
+          <div class="drink-card">
+            <div class="drink-info">
+              <p>Featured today</p>
+              <h2 id="featured-title">Peppermint Cloud</h2>
+              <div class="drink-image">
+                <img src="Featured%20Drinks/Peppermintcloud.jpg" alt="Peppermint Cloud hot chocolate topped with whipped cream">
+              </div>
+              <p>Hot chocolate with peppermint and whipped cream.</p>
+              <strong>$5.75</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="intro" aria-labelledby="menu-title">
+      <p class="eyebrow">The winter menu</p>
+      <h2 id="menu-title">Find a cold-weather favourite.</h2>
+      <p>From rich hot chocolate to bright, iced drinks, the menu has something for every kind of snow day.</p>
+      <a href="explore.html">View the menu <span aria-hidden="true">→</span></a>
+    </section>
+
+    <section class="features" aria-labelledby="featured-drinks-title">
+      <div class="section-heading">
+        <p class="eyebrow">Featured drinks</p>
+        <h2 id="featured-drinks-title">Three ways to warm up.</h2>
+      </div>
+      <article class="feature-card">
+        <h3>Snowberry Latte</h3>
+        <img src="Featured%20Drinks/Snowberry%20Latte.jpg" alt="Snowberry Latte">
+        <p>A smooth latte with a bright berry note.</p>
+      </article>
+      <article class="feature-card featured">
+        <h3>Frosted Mocha</h3>
+        <img src="Featured%20Drinks/Frosted%20Mocha.jpg" alt="Frosted Mocha">
+        <p>Chocolate, espresso, and a little winter chill.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Cinnamon Snowcap</h3>
+        <img src="Featured%20Drinks/Cinnamon%20Snowcap.jpg" alt="Cinnamon Snowcap">
+        <p>A spiced, creamy drink finished with cinnamon.</p>
+      </article>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <p class="eyebrow">Your drink, your way</p>
+      <h2 id="cta-title">What will you have this winter?</h2>
+      <a class="primary-button" href="build.html">Make a drink</a>
+    </section>
+  </main>
+
+  <footer>
+    <a class="footer-logo" href="index.html">Snowglobe Café</a>
+    <p>For snowy days and late nights.</p>
+    <p class="copyright">© 2026 Snowglobe Café</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>

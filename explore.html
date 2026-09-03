@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse the seasonal menu at Snowglobe Caf&eacute;.">
+  <title>Menu | Snowglobe Caf&eacute;</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <a class="logo" href="index.html">Snowglobe Caf&eacute;</a>
+    <nav aria-label="Primary navigation">
+      <a class="active" href="explore.html">Menu</a>
+      <a href="build.html">Build a drink</a>
+    </nav>
+    <a class="nav-button" href="build.html">Make a drink</a>
+  </header>
+
+  <main>
+    <section class="page-header" aria-labelledby="page-title">
+      <p class="eyebrow">The winter menu</p>
+      <h1 id="page-title">Drinks for<br><span>cold days.</span></h1>
+      <p>Four seasonal favourites, from rich hot chocolate to bright iced coffee.</p>
+    </section>
+
+    <section class="menu-filter" aria-label="Filter drinks">
+      <button class="filter-button active" type="button" data-category="all" aria-pressed="true">All drinks</button>
+      <button class="filter-button" type="button" data-category="warm" aria-pressed="false">Warm</button>
+      <button class="filter-button" type="button" data-category="cold" aria-pressed="false">Iced</button>
+      <button class="filter-button" type="button" data-category="treat" aria-pressed="false">Sweet</button>
+    </section>
+
+    <section class="menu-grid" aria-label="Seasonal drinks">
+      <article class="menu-card" data-category="warm treat">
+        <img src="Featured%20Drinks/Peppermintcloud.jpg" alt="Peppermint Cloud hot chocolate topped with whipped cream">
+        <div class="menu-card-content">
+          <p class="drink-category">Warm · Sweet</p>
+          <div class="drink-title"><h2>Peppermint Cloud</h2><strong>$5.75</strong></div>
+          <p>Rich hot chocolate with peppermint and whipped cream.</p>
+        </div>
+      </article>
+
+      <article class="menu-card" data-category="cold">
+        <img src="Featured%20Drinks/Snowberry%20Latte.jpg" alt="Snowberry Latte">
+        <div class="menu-card-content">
+          <p class="drink-category">Iced</p>
+          <div class="drink-title"><h2>Snowberry Latte</h2><strong>$5.95</strong></div>
+          <p>A smooth latte with a bright berry note and cold foam.</p>
+        </div>
+      </article>
+
+      <article class="menu-card" data-category="warm">
+        <img src="Featured%20Drinks/Cinnamon%20Snowcap.jpg" alt="Cinnamon Snowcap">
+        <div class="menu-card-content">
+          <p class="drink-category">Warm</p>
+          <div class="drink-title"><h2>Cinnamon Snowcap</h2><strong>$5.50</strong></div>
+          <p>Spiced chai with vanilla, cinnamon, and a creamy finish.</p>
+        </div>
+      </article>
+
+      <article class="menu-card" data-category="cold treat">
+        <img src="Featured%20Drinks/Frosted%20Mocha.jpg" alt="Frosted Mocha">
+        <div class="menu-card-content">
+          <p class="drink-category">Iced · Sweet</p>
+          <div class="drink-title"><h2>Frosted Mocha</h2><strong>$6.25</strong></div>
+          <p>Chocolate, espresso, and a cool layer of whipped cream.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="build-cta" aria-labelledby="build-title">
+      <p class="eyebrow">Want something different?</p>
+      <h2 id="build-title">Make it yours.</h2>
+      <p>Start with a drink you like, then choose the flavours and finishing touches.</p>
+      <a class="primary-button" href="build.html">Build a drink <span aria-hidden="true">&rarr;</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <a class="footer-logo" href="index.html">Snowglobe Caf&eacute;</a>
+    <p>For snowy days and late nights.</p>
+    <p class="copyright">&copy; 2026 Snowglobe Caf&eacute;</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
