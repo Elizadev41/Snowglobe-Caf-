@@ -22,38 +22,75 @@
     <section class="builder-header" aria-labelledby="builder-title">
       <p class="eyebrow">Build a drink</p>
       <h1 id="builder-title">Make it<br><span>how you want.</span></h1>
-      <p>Choose one from each section. You can change your mind.</p>
+      <p>Pick a size and base, then add any flavors or toppings you want.</p>
+    </section>
+
+    <section class="choice-card" data-choice-group="size">
+      <h2>Choose a size</h2>
+      <div class="choice-row">
+        <button class="choice-option" type="button" data-choice="Small">Small</button>
+        <button class="choice-option" type="button" data-choice="Medium">Medium</button>
+        <button class="choice-option" type="button" data-choice="Large">Large</button>
+      </div>
+      <button class="clear-selection" type="button">Clear</button>
     </section>
 
     <section class="choice-card" data-choice-group="base">
-      <h2>Start with</h2>
+      <h2>Pick a base</h2>
       <div class="choice-row">
         <button class="choice-option" type="button" data-choice="Coffee">Coffee</button>
         <button class="choice-option" type="button" data-choice="Hot chocolate">Hot chocolate</button>
         <button class="choice-option" type="button" data-choice="Chai">Chai</button>
         <button class="choice-option" type="button" data-choice="Iced latte">Iced latte</button>
+        <button class="choice-option" type="button" data-choice="Matcha">Matcha</button>
+        <button class="choice-option" type="button" data-choice="Cocoa">Cocoa</button>
       </div>
       <button class="clear-selection" type="button">Clear</button>
     </section>
 
     <section class="choice-card" data-choice-group="flavour">
-      <h2>Add a flavour</h2>
+      <h2>Add a flavor</h2>
       <div class="choice-row">
         <button class="choice-option" type="button" data-choice="Vanilla">Vanilla</button>
         <button class="choice-option" type="button" data-choice="Peppermint">Peppermint</button>
         <button class="choice-option" type="button" data-choice="Cinnamon">Cinnamon</button>
         <button class="choice-option" type="button" data-choice="Berry">Berry</button>
+        <button class="choice-option" type="button" data-choice="Maple">Maple</button>
+        <button class="choice-option" type="button" data-choice="Toffee">Toffee</button>
+        <button class="choice-option" type="button" data-choice="Caramel">Caramel</button>
+        <button class="choice-option" type="button" data-choice="Hazelnut">Hazelnut</button>
       </div>
-      <button class="clear-selection" type="button">Clear</button>
+      <div class="choice-actions">
+        <span class="selection-count" aria-live="polite">0/6 selected</span>
+        <button class="clear-selection" type="button">Clear</button>
+      </div>
     </section>
 
-    <section class="choice-card" data-choice-group="finish">
-      <h2>Finish it with</h2>
+    <section class="choice-card" data-choice-group="topping">
+      <h2>Top it off</h2>
       <div class="choice-row">
         <button class="choice-option" type="button" data-choice="Whipped cream">Whipped cream</button>
         <button class="choice-option" type="button" data-choice="Cold foam">Cold foam</button>
         <button class="choice-option" type="button" data-choice="Marshmallows">Marshmallows</button>
-        <button class="choice-option" type="button" data-choice="Nothing extra">Nothing extra</button>
+        <button class="choice-option" type="button" data-choice="Cookie crumbs">Cookie crumbs</button>
+        <button class="choice-option" type="button" data-choice="Cinnamon dust">Cinnamon dust</button>
+        <button class="choice-option" type="button" data-choice="No extra topping">No extra topping</button>
+      </div>
+      <div class="choice-actions">
+        <span class="selection-count" aria-live="polite">0/6 selected</span>
+        <button class="clear-selection" type="button">Clear</button>
+      </div>
+    </section>
+
+    <section class="choice-card" data-choice-group="finish">
+      <h2>Pick the finish</h2>
+      <div class="choice-row">
+        <button class="choice-option" type="button" data-choice="Extra hot">Extra hot</button>
+        <button class="choice-option" type="button" data-choice="Iced">Iced</button>
+        <button class="choice-option" type="button" data-choice="Blended">Blended</button>
+        <button class="choice-option" type="button" data-choice="Light foam">Light foam</button>
+        <button class="choice-option" type="button" data-choice="Extra sweet">Extra sweet</button>
+        <button class="choice-option" type="button" data-choice="Regular">Regular</button>
       </div>
       <button class="clear-selection" type="button">Clear</button>
     </section>
@@ -64,6 +101,17 @@
       <button id="place-order" type="button">Add to order</button>
       <p id="order-count">No drinks added yet.</p>
     </section>
+
+    <aside class="custom-cart-panel" aria-live="polite">
+      <h2>Order cart</h2>
+      <ul id="custom-order-list" class="custom-cart-list">
+        <li class="empty-cart">No custom drinks yet.</li>
+      </ul>
+      <div class="custom-cart-total">
+        <span>Total</span>
+        <strong id="custom-order-total">$0.00</strong>
+      </div>
+    </aside>
   </main>
 
   <footer>
@@ -72,6 +120,6 @@
     <p class="copyright">&copy; 2026 Snowglobe Caf&eacute;</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>

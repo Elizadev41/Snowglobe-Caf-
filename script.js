@@ -68,16 +68,100 @@ const choiceCards = document.querySelectorAll('[data-choice-group]');
 const orderSummary = document.querySelector('.order-summary');
 const orderButton = document.querySelector('#place-order');
 const orderCount = document.querySelector('#order-count');
+const customOrderList = document.querySelector('#custom-order-list');
+const customOrderTotal = document.querySelector('#custom-order-total');
 const selections = {};
-let orders = 0;
+let customOrders = [];
+
+const sizePrices = {
+  Small: 0,
+  Medium: 0.6,
+  Large: 0.8
+};
+
+const baseDrinkPrice = 4.25;
+const extraChoicePrice = 0.6;
+const maxExtras = 6;
+const maxDrinkPrice = 20;
+
+function getSelectedValues(group) {
+  const value = selections[group];
+
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  return value ? [value] : [];
+}
+
+function getDrinkPrice() {
+  const sizePrice = sizePrices[selections.size] || 0;
+  const flavorCount = getSelectedValues('flavour').length;
+  const toppingCount = getSelectedValues('topping').length;
+  const total = baseDrinkPrice + sizePrice + (flavorCount + toppingCount) * extraChoicePrice;
+
+  return Math.min(total, maxDrinkPrice);
+}
 
 function updateOrderSummary() {
   if (!orderSummary) return;
 
-  const chosenItems = Object.values(selections);
-  orderSummary.textContent = chosenItems.length
-    ? chosenItems.join(' · ')
+  const size = selections.size || 'Size';
+  const base = selections.base || 'Base';
+  const flavours = getSelectedValues('flavour');
+  const toppings = getSelectedValues('topping');
+  const finish = selections.finish || 'Regular';
+
+  const parts = [size, base];
+
+  if (flavours.length) {
+    parts.push(`flavors: ${flavours.join(', ')}`);
+  }
+
+  if (toppings.length) {
+    parts.push(`toppings: ${toppings.join(', ')}`);
+  }
+
+  parts.push(finish);
+
+  orderSummary.textContent = selections.size && selections.base
+    ? parts.join(' · ')
     : 'Pick your options above.';
+}
+
+function renderCustomOrders() {
+  if (!customOrderList || !customOrderTotal) return;
+
+  if (!customOrders.length) {
+    customOrderList.innerHTML = '<li class="empty-cart">No custom drinks yet.</li>';
+    customOrderTotal.textContent = '$0.00';
+    return;
+  }
+
+  customOrderList.innerHTML = customOrders
+    .map(
+      (item, index) => `
+        <li>
+          <span class="custom-cart-item">
+            <strong>${item.name}</strong>
+            <span>${formatPrice(item.price)}</span>
+          </span>
+          <button class="remove-item" type="button" data-index="${index}">Remove</button>
+        </li>
+      `
+    )
+    .join('');
+
+  const total = customOrders.reduce((sum, item) => sum + item.price, 0);
+  customOrderTotal.textContent = formatPrice(total);
+
+  customOrderList.querySelectorAll('.remove-item').forEach((button) => {
+    button.addEventListener('click', () => {
+      const index = Number(button.dataset.index);
+      customOrders.splice(index, 1);
+      renderCustomOrders();
+    });
+  });
 }
 
 choiceCards.forEach((card) => {
@@ -87,25 +171,76 @@ choiceCards.forEach((card) => {
 
   options.forEach((option) => {
     option.addEventListener('click', () => {
-      options.forEach((item) => item.classList.toggle('selected', item === option));
-      selections[group] = option.dataset.choice;
+      if (group === 'flavour' || group === 'topping') {
+        const currentValues = getSelectedValues(group);
+        const selectedChoice = option.dataset.choice;
+        const isActive = currentValues.includes(selectedChoice);
+
+        if (!isActive && currentValues.length >= maxExtras) {
+          return;
+        }
+
+        let nextValues;
+
+        if (group === 'topping' && selectedChoice === 'No extra topping') {
+          options.forEach((item) => item.classList.remove('selected'));
+          option.classList.add('selected');
+          nextValues = isActive ? [] : [selectedChoice];
+        } else {
+          const withoutNoTopping = currentValues.filter((value) => value !== 'No extra topping');
+          option.classList.toggle('selected', !isActive);
+          nextValues = isActive
+            ? withoutNoTopping.filter((value) => value !== selectedChoice)
+            : [...withoutNoTopping, selectedChoice];
+        }
+
+        selections[group] = nextValues;
+        card.querySelector('.selection-count').textContent = `${nextValues.length}/${maxExtras} selected`;
+      } else {
+        options.forEach((item) => item.classList.toggle('selected', item === option));
+        selections[group] = option.dataset.choice;
+      }
+
       updateOrderSummary();
     });
   });
 
   clearButton?.addEventListener('click', () => {
     options.forEach((option) => option.classList.remove('selected'));
-    delete selections[group];
+
+    if (group === 'flavour' || group === 'topping') {
+      selections[group] = [];
+      card.querySelector('.selection-count').textContent = `0/${maxExtras} selected`;
+    } else {
+      delete selections[group];
+    }
+
     updateOrderSummary();
   });
 });
 
 orderButton?.addEventListener('click', () => {
-  if (!Object.keys(selections).length) {
-    orderCount.textContent = 'Choose at least one option first.';
+  if (!selections.size || !selections.base) {
+    orderCount.textContent = 'Choose a size and base first.';
     return;
   }
 
-  orders += 1;
-  orderCount.textContent = `${orders} drink${orders === 1 ? '' : 's'} added.`;
+  const size = selections.size;
+  const base = selections.base;
+  const flavours = getSelectedValues('flavour');
+  const toppings = getSelectedValues('topping');
+  const finish = selections.finish || 'Regular';
+  const totalPrice = getDrinkPrice();
+
+  const flavourText = flavours.length ? `with ${flavours.join(', ')}` : 'regular';
+  const toppingText = toppings.length ? ` + ${toppings.join(', ')}` : '';
+  const displayName = `${size} ${base} ${flavourText}${toppingText} • ${finish}`;
+
+  customOrders.push({
+    name: displayName,
+    price: totalPrice
+  });
+
+  renderCustomOrders();
+  orderCount.textContent = `${customOrders.length} custom drink${customOrders.length === 1 ? '' : 's'} added.`;
 });
